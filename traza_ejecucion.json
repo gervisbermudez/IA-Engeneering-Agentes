@@ -1,0 +1,142 @@
+{
+  "recursion_limit": 10,
+  "turno_1_multi_paso": [
+    {
+      "tipo": "HumanMessage",
+      "contenido": "¿Cuántos pedidos tuvo el cliente 102 y cuál fue el total?"
+    },
+    {
+      "tipo": "AIMessage",
+      "contenido": "",
+      "tool_calls": [
+        {
+          "nombre": "buscar_pedidos",
+          "argumentos": {
+            "cliente_id": 102
+          }
+        },
+        {
+          "nombre": "total_pedidos",
+          "argumentos": {
+            "cliente_id": 102
+          }
+        }
+      ]
+    },
+    {
+      "tipo": "ToolMessage",
+      "contenido": "{\"ok\": true, \"cliente_id\": 102, \"pedidos\": 3, \"pedido_ids\": [9001, 9002, 9003], \"incompleto\": true, \"aviso\": \"Este listado no trae el monto total. Llamá a total_pedidos con el mismo cliente_id.\"}",
+      "herramienta": "buscar_pedidos"
+    },
+    {
+      "tipo": "ToolMessage",
+      "contenido": "{\"ok\": true, \"cliente_id\": 102, \"pedidos\": 3, \"total\": 14500}",
+      "herramienta": "total_pedidos"
+    },
+    {
+      "tipo": "AIMessage",
+      "contenido": "El cliente 102 tuvo 3 pedidos y el total de esos pedidos es 14,500. ¿Querés saber algo más?"
+    }
+  ],
+  "turno_2_memoria": [
+    {
+      "tipo": "HumanMessage",
+      "contenido": "¿Cuántos pedidos tuvo el cliente 102 y cuál fue el total?"
+    },
+    {
+      "tipo": "AIMessage",
+      "contenido": "",
+      "tool_calls": [
+        {
+          "nombre": "buscar_pedidos",
+          "argumentos": {
+            "cliente_id": 102
+          }
+        },
+        {
+          "nombre": "total_pedidos",
+          "argumentos": {
+            "cliente_id": 102
+          }
+        }
+      ]
+    },
+    {
+      "tipo": "ToolMessage",
+      "contenido": "{\"ok\": true, \"cliente_id\": 102, \"pedidos\": 3, \"pedido_ids\": [9001, 9002, 9003], \"incompleto\": true, \"aviso\": \"Este listado no trae el monto total. Llamá a total_pedidos con el mismo cliente_id.\"}",
+      "herramienta": "buscar_pedidos"
+    },
+    {
+      "tipo": "ToolMessage",
+      "contenido": "{\"ok\": true, \"cliente_id\": 102, \"pedidos\": 3, \"total\": 14500}",
+      "herramienta": "total_pedidos"
+    },
+    {
+      "tipo": "AIMessage",
+      "contenido": "El cliente 102 tuvo 3 pedidos y el total de esos pedidos es 14,500. ¿Querés saber algo más?"
+    },
+    {
+      "tipo": "HumanMessage",
+      "contenido": "¿y el último?"
+    },
+    {
+      "tipo": "AIMessage",
+      "contenido": "",
+      "tool_calls": [
+        {
+          "nombre": "ultimo_pedido",
+          "argumentos": {
+            "cliente_id": 102
+          }
+        }
+      ]
+    },
+    {
+      "tipo": "ToolMessage",
+      "contenido": "{\"ok\": true, \"cliente_id\": 102, \"ultimo\": {\"pedido_id\": 9003, \"fecha\": \"2026-06-18\", \"total\": 4200}}",
+      "herramienta": "ultimo_pedido"
+    },
+    {
+      "tipo": "AIMessage",
+      "contenido": "El último pedido del cliente 102 fue el número 9003, realizado el 18 de junio de 2026, con un total de 4,200. ¿Querés que te ayude con algo más?"
+    }
+  ],
+  "prueba_error_y_aclaracion": [
+    {
+      "tipo": "HumanMessage",
+      "contenido": "¿Cuántos pedidos tuvo el cliente 999 y cuál fue el total?"
+    },
+    {
+      "tipo": "AIMessage",
+      "contenido": "",
+      "tool_calls": [
+        {
+          "nombre": "buscar_pedidos",
+          "argumentos": {
+            "cliente_id": 999
+          }
+        },
+        {
+          "nombre": "total_pedidos",
+          "argumentos": {
+            "cliente_id": 999
+          }
+        }
+      ]
+    },
+    {
+      "tipo": "ToolMessage",
+      "contenido": "{\"ok\": false, \"error\": \"cliente_no_encontrado\", \"detalle\": \"No hay pedidos para el cliente 999. Pedile al usuario que confirme el identificador.\"}",
+      "herramienta": "buscar_pedidos"
+    },
+    {
+      "tipo": "ToolMessage",
+      "contenido": "{\"ok\": false, \"error\": \"cliente_no_encontrado\", \"detalle\": \"No hay pedidos para el cliente 999. Confirmá el id con el usuario.\"}",
+      "herramienta": "total_pedidos"
+    },
+    {
+      "tipo": "AIMessage",
+      "contenido": "No hay pedidos para el cliente 999. ¿Podrías confirmar si el identificador del cliente es correcto?"
+    }
+  ]
+}
